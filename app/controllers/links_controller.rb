@@ -1,4 +1,5 @@
 class LinksController < ApplicationController
+  caches_page :home, :about, :api, :report
 
   def index
     @link = Link.new
