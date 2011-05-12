@@ -2,6 +2,8 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  protect_from_forgery
+
   before_filter :calculate_links
 
   # refactor to some sort of cache tool
