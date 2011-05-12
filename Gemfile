@@ -6,7 +6,6 @@ gem 'rails', '3.0.7'
 gem 'pg'
 gem 'domainatrix'
 
-group :test do
-  gem 'rspec', ">= 2.0"
-  gem 'rspec-rails', ">= 2.0"
+group :development, :test do
+  gem 'rspec-rails', ">= 2.4"
 end
