@@ -1,5 +1,5 @@
 Rubyurl::Application.routes.draw do
-  match '' => 'links#index'
+  root :to => 'links#index'
   match 'rubyurl/remote' => 'links#create'
   match 'about' => 'links#about'
   match 'api' => 'links#api'

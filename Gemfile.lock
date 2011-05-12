@@ -89,5 +89,4 @@ DEPENDENCIES
   domainatrix
   pg
   rails (= 3.0.7)
-  rspec (>= 2.0)
-  rspec-rails (>= 2.0)
+  rspec-rails (>= 2.4)
