@@ -18,4 +18,7 @@ config.action_controller.perform_caching             = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
+config.gem 'rspec', :version => '1.3.2', :lib => 'spec'
+config.gem 'rspec-rails', :version => '1.3.4', :lib => 'spec/rails'
+
 DOMAIN_NAME = 'http://rubyurl.com/'
