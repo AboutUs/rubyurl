@@ -1,17 +1,15 @@
 # PLANET ARGON approved database.yml file
 login: &login
-  adapter: postgresql
-  host: localhost
-  port: 5432
+  adapter: sqlite3
 
 development:
-  database: rubyurl_development
+  database: db/rubyurl_development.sqlite3
   <<: *login
 
 test:
-  database: rubyurl_test
+  database: db/rubyurl_test.sqlite3
   <<: *login
 
 production:
-  database: rubyurl_production
+  database: db/rubyurl_production.sqlite3
   <<: *login
