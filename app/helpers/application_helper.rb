@@ -25,5 +25,6 @@ module ApplicationHelper
       />
       </object>
     EOF
+    html.html_safe
   end
 end
