@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 describe LinksController, "index action" do
   it "should redirect to the home action" do

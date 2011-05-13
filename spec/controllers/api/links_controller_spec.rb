@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../../spec_helper'
+require 'spec_helper'
 
 describe Api::LinksController, "creating a new rubyurl" do
   def valid_parameters
