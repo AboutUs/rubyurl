@@ -6,13 +6,14 @@ class Link < ActiveRecord::Base
   has_many :visits
   has_many :spam_visits, :class_name => 'Visit', :conditions => ["flagged = 'spam'"]
 
-  validates_presence_of :website_url, :ip_address
-  validates_uniqueness_of :website_url, :token
+  validates :website_url, :presence => true, :uniqueness => true
+  validates :ip_address, :presence => true
+  validates :token, :uniqueness => true
+
   validates_format_of :website_url, :with => /^(http|https):\/\/[a-z0-9]/ix, :message => 'needs to have http(s):// in front of it', :if => Proc.new { |p| p.website_url? }
+  validate :not_in_surbl, :if => Proc.new { |p| p.website_url? && p.errors[:website_url].blank? }
 
   before_create :generate_token
-
-  validate :not_in_surbl, :if => Proc.new { |p| p.website_url? && p.errors[:website_url].blank? }
 
   def flagged_as_spam?
     self.spam_visits.empty? ? false : true
