@@ -9,3 +9,8 @@ gem 'domainatrix'
 group :development, :test do
   gem 'rspec-rails', ">= 2.4"
 end
+
+group :test do
+  gem 'capybara'
+  gem 'rspec2-rails-views-matchers'
+end
