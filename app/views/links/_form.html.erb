@@ -1,4 +1,4 @@
-<% form_for :link, @link, :url => {:controller => :links ,:action => 'create'}  do |f| %>
+<%= form_for @link, :as => :link, :url => {:controller => :links ,:action => 'create'}  do |f| %>
   <label for="link_website_url">Create a RubyURL</label>
   <%= f.text_field :website_url %>
   
