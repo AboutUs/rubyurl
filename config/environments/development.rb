@@ -24,4 +24,4 @@ Rubyurl::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 end
 
-DOMAIN_NAME = 'http://localhost:3000/'
+DOMAIN_NAME = 'http://rubyurl.dev/'
