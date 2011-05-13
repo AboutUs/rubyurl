@@ -1,6 +1,10 @@
 Rubyurl::Application.routes.draw do
   root :to => 'links#index'
-  resources :links
+  resources :links do
+    collection do
+      get :invalid
+    end
+  end
   match 'rubyurl/remote' => 'links#create'
   match 'about' => 'links#about'
   match 'api' => 'links#api'
