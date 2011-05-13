@@ -12,7 +12,7 @@ class Link < ActiveRecord::Base
 
   before_create :generate_token
 
-  validate :not_in_surbl, :if => Proc.new { |p| p.website_url? && p.errors.on(:website_url).blank? }
+  validate :not_in_surbl, :if => Proc.new { |p| p.website_url? && p.errors[:website_url].blank? }
 
   def flagged_as_spam?
     self.spam_visits.empty? ? false : true
@@ -43,7 +43,7 @@ class Link < ActiveRecord::Base
       begin
         url = Domainatrix.parse(self.website_url)
         dig_response = %x[/usr/bin/dig +short #{url.domain}.#{url.public_suffix}.multi.surbl.org]
-        RAILS_DEFAULT_LOGGER.warn("DEBUG: #{dig_response.inspect}")
+        Rails.logger.warn("DEBUG: #{dig_response.inspect}")
         errors.add_to_base("SPAM. Domain was found in surbl.") if dig_response =~ /127.0/i
       rescue
       end
