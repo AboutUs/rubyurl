@@ -1,10 +1,6 @@
 class LinksController < ApplicationController
 
   def index
-    redirect_to '/home'
-  end
-
-  def home
     @link = Link.new
     render :action => 'index'
   end
@@ -23,7 +19,7 @@ class LinksController < ApplicationController
     end
   end
 
-  def redirect
+  def show
     @link = Link.find_by_token( params[:token] )
 
     unless @link.nil?

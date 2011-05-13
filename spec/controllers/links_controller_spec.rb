@@ -1,17 +1,10 @@
 require 'spec_helper'
 
 describe LinksController, "index action" do
-  it "should redirect to the home action" do
-    get :index
-    response.should redirect_to( :action => 'home' )
-  end
-end
-
-describe LinksController, "home action" do
   before(:each) do
     @link = mock('link')
     Link.stub!(:new).and_return(@link)
-    get :home
+    get :index
   end
 
   it "should render the index view" do
@@ -39,12 +32,12 @@ describe LinksController do
 end
 
 describe LinksController, "redirect routing" do
-  it "should route to the redirect action in LinksController" do
-    assert_routing '/abc', { :controller => 'links', :action => 'redirect', :token => 'abc' }
+  it "should route to the show action in LinksController" do
+    assert_routing '/abc', { :controller => 'links', :action => 'show', :token => 'abc' }
   end
 
   it "should redirect to the invalid page when the token is invalid" do
-    get :redirect, :token => 'magoo'
+    get :show, :token => 'magoo'
     response.should redirect_to( :action => 'invalid' )
   end
 end
@@ -55,7 +48,7 @@ describe LinksController, "redirect with token" do
     Link.should_receive( :find_by_token ).with( 'abc' ).and_return( @link )
     @link.stub!( :add_visit )
     @link.should_receive( :website_url ).and_return( 'http://google.com/' )
-    get :redirect, :token => 'abc'
+    get :show, :token => 'abc'
   end
 
   it "should call redirected to a website when passed a token" do
