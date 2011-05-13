@@ -5,6 +5,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.7'
 gem 'pg'
 gem 'domainatrix'
+gem 'builder'
 
 group :development, :test do
   gem 'rspec-rails', ">= 2.4"
