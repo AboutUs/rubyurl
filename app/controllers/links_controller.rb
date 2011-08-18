@@ -7,19 +7,18 @@ class LinksController < ApplicationController
   end
 
   def create
-    website_url = params.include?(:website_url) ? params[:website_url] : params[:link][:website_url]
-    @link = Link.new(:website_url => website_url)
-    @link.source_uri = 'http://' + request.env['HTTP_HOST']
- 
+    params[:link] ||= {}
+    params[:link][:website_url] ||= params[:website_url]
 
+    @link = Link.new(params[:link])
+    @link.source_uri = 'http://' + request.env['HTTP_HOST']
     @link.ip_address = request.remote_ip if @link.new_record?
 
     if @link.save
-      calculate_links # application controller, refactor soon
       render :action => :show
     else
-      flash[:warning] = 'There was an issue trying to create your RubyURL.'
-      redirect_to :action => :invalid
+      flash[:warning] = @link.errors.inspect
+      render :action => 'invalid'
     end
   end
 

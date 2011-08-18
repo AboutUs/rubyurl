@@ -7,7 +7,7 @@ class Link < ActiveRecord::Base
   has_many :visits
   has_many :spam_visits, :class_name => 'Visit', :conditions => ["flagged = 'spam'"]
 
-  validates :website_url, :presence => true, :uniqueness => true
+  validates :website_url, :presence => true
   validates :ip_address, :presence => true
   validates :token, :uniqueness => true
 
@@ -15,6 +15,7 @@ class Link < ActiveRecord::Base
   validate :not_in_surbl, :if => Proc.new { |p| p.website_url? && p.errors[:website_url].blank? }
 
   before_create :generate_token
+  before_create :build_permalink
 
   def flagged_as_spam?
     self.spam_visits.empty? ? false : true
@@ -64,9 +65,9 @@ class Link < ActiveRecord::Base
   end
 
   def generate_token
+    return if self.token
     if (temp_token = random_token) and self.class.find_by_token(temp_token).nil?
       self.token = temp_token
-      build_permalink
     else
       generate_token
     end
