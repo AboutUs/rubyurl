@@ -6,9 +6,7 @@
     <title>AboutUs &raquo; <%= (title = yield :title) ? title : '' %></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Content-Language" content="en-us" />
-    <meta name="ROBOTS" content="ALL" />
-    <meta http-equiv="imagetoolbar" content="false" />
-    <meta name="MSSmartTagsPreventParsing" content="true" />
+
 
     <%= stylesheet_link_tag "reset" %>
     <%= stylesheet_link_tag "master" %>
@@ -19,13 +17,20 @@
   <body>
     <div class="wrapper">
       <div id="header">
-        <%= render :partial => 'shared/header' %>
-  </div> <!-- end header -->
-  <%= yield %>
-</div><!-- end wrapper -->
-<div id="footer">
-  <%= render :partial => 'shared/footer' %>
-</div> <!-- end footer -->
+        <a id="logo" href="/" title="AboutUs URL Shortener">AboutUs</a>
+        <ul id="main_nav">
+          <li><a href="javascript:void(location.host=='maps.google.com'?location.href='<%= rubyurl_remote_url %>?website_url='+encodeURIComponent(document.getElementById('link').href):location.href='<%= rubyurl_remote_url %>?website_url='+encodeURIComponent(location.href))">Bookmarklet</a></li>
+          <li><%= link_to 'Report Abuse!', 'mailto:support@aboutus.org?subject=URLShortenerAbuse' %></li>
+        </ul>
+      </div>
 
-</body>
+      <div class="flashes">
+        <% flash.each do |k, v| %>
+          <div class="flash <%= k %>"><%= v %></div>
+        <% end %>
+      </div>
+
+      <%= yield %>
+    </div>
+  </body>
 </html>
