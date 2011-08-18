@@ -9,7 +9,8 @@ class LinksController < ApplicationController
   def create
     website_url = params.include?(:website_url) ? params[:website_url] : params[:link][:website_url]
     @link = Link.new(:website_url => website_url)
-    @link.source_uri = request.env['REQUEST_URI']
+    @link.source_uri = 'http://' + request.env['HTTP_HOST']
+ 
 
     @link.ip_address = request.remote_ip if @link.new_record?
 

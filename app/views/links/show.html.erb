@@ -1,7 +1,7 @@
 <div id="app_content">
   <div id="url">
     <dl>
-      <dt>Here is your RubyURL</dt>
+      <dt>Here is your URL</dt>
       <dd><%= link_to @link.permalink, @link.permalink -%></dd> 
     </dl>
     <div id="x_copy_button" style="float:right;">
@@ -9,20 +9,11 @@
     </div>    
 
     <div id="x_copied" style="display:none;">
-      <p>Your RubyURL is ready for pasting!</p>
+      <p>Your URL is ready for pasting!</p>
     </div>
     
     <p id="original_url_info">Original URL: <span id="original_url"><%= @link.website_url -%></span></p> 
     
-    <p><%= link_to 'Create another rubyurl', '/' -%> &#8617;</p>
+    <p><%= link_to 'Shorten another URL', '/' -%> &#8617;</p>
   </div>
-
-  <dl id="url_stats">
-    <dt>Original URL Length:</dt> 
-    <dd><%= @link.website_url.length -%> characters</dd>
-    <dt>RubyURL Length:</dt> 
-    <dd><%= @link.permalink.length -%> characters</dd>
-    <dt>shortened by:</dt> 
-    <dd><%= @link.website_url.length - @link.permalink.length -%> characters</dd>
-  </dl>
 </div><!-- end app_content -->
