@@ -40,38 +40,38 @@ class Link < ActiveRecord::Base
 
   private
 
-    def not_in_surbl
-      begin
-        url = Domainatrix.parse(self.website_url)
-        dig_response = %x[/usr/bin/dig +short #{url.domain}.#{url.public_suffix}.multi.surbl.org]
-        Rails.logger.warn("DEBUG: #{dig_response.inspect}")
-        errors.add_to_base("SPAM. Domain was found in surbl.") if dig_response =~ /127.0/i
-      rescue
-      end
+  def not_in_surbl
+    begin
+      url = Domainatrix.parse(self.website_url)
+      dig_response = %x[/usr/bin/dig +short #{url.domain}.#{url.public_suffix}.multi.surbl.org]
+      Rails.logger.warn("DEBUG: #{dig_response.inspect}")
+      errors.add_to_base("SPAM. Domain was found in surbl.") if dig_response =~ /127.0/i
+    rescue
     end
+  end
 
-    def generate_token
-      if (temp_token = random_token) and self.class.find_by_token(temp_token).nil?
-        self.token = temp_token
-        build_permalink
-      else
-        generate_token
-      end
+  def generate_token
+    if (temp_token = random_token) and self.class.find_by_token(temp_token).nil?
+      self.token = temp_token
+      build_permalink
+    else
+      generate_token
     end
+  end
 
-    def build_permalink
-      self.permalink = DOMAIN_NAME + self.token
-    end
+  def build_permalink
+    self.permalink = DOMAIN_NAME + self.token
+  end
 
-    def random_token
-      characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'
-      temp_token = ''
-      srand
-      TOKEN_LENGTH.times do
-        pos = rand(characters.length)
-        temp_token += characters[pos..pos]
-      end
-      temp_token
+  def random_token
+    characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'
+    temp_token = ''
+    srand
+    TOKEN_LENGTH.times do
+      pos = rand(characters.length)
+      temp_token += characters[pos..pos]
     end
+    temp_token
+  end
 end
 
