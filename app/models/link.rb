@@ -1,4 +1,5 @@
 require 'domainatrix'
+require 'uri'
 
 class Link < ActiveRecord::Base
   TOKEN_LENGTH = 4
@@ -34,6 +35,18 @@ class Link < ActiveRecord::Base
     end
   end
 
+  def source_uri=(uri_or_url)
+    if uri_or_url.is_a?(String)
+      @source_uri = URI.parse(uri_or_url)
+    else
+      @source_uri = uri_or_url
+    end
+  end
+
+  def source_uri
+    @source_uri
+  end
+
   def to_api_json
     self.to_json( :only => [ :website_url, :permalink ] )
   end
@@ -60,7 +73,8 @@ class Link < ActiveRecord::Base
   end
 
   def build_permalink
-    self.permalink = DOMAIN_NAME + self.token
+    self.source_uri.path = '/' + self.token
+    self.permalink = self.source_uri.to_s
   end
 
   def random_token

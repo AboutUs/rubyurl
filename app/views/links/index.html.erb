@@ -3,13 +3,6 @@
   <div id="url">
     <%= render :partial => 'links/form' %>
   </div>
-  <div id="bookmarklet_instructions">
-    <div id="helper_copy">
-      <p>Drag bookmarklet to bookmark toolbar.</p>
-    </div>
-    <div id="bookmarklet">
-      <p><a href="javascript:void(location.host=='maps.google.com'?location.href='<%= rubyurl_remote_url %>?website_url='+encodeURIComponent(document.getElementById('link').href):location.href='<%= rubyurl_remote_url %>?website_url='+encodeURIComponent(location.href))">RubyURL this</a> </p>
-    </div>
-  </div> <!-- /bookmarklet_instructions -->
-  <p>Add RubyURL to your favorite browser by dragging the bookmarklet (the link in the red area) to the <strong>bookmark toolbar</strong> of your browser and create RubyURLs on the fly!</p>
+
+
 </div><!-- end app_content -->

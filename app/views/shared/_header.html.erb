@@ -1,6 +1,5 @@
-<a id="logo" href="/" title="RubyURL">RubyURL</a>
+<a id="logo" href="/" title="AboutUs URL Shortener">AboutUs</a>
 <ul id="main_nav">
-	<li><%= link_to 'What is RubyURL?', '/about' -%></li>
-	<li><%= link_to 'API Documentation', '/api' -%></li>
-	<li><%= link_to 'Report Abuse!', '/report-abuse', :id => 'abuse' -%></li>
+  <li><a href="javascript:void(location.host=='maps.google.com'?location.href='<%= rubyurl_remote_url %>?website_url='+encodeURIComponent(document.getElementById('link').href):location.href='<%= rubyurl_remote_url %>?website_url='+encodeURIComponent(location.href))">Bookmarklet</a></li>
+  <li><%= link_to 'Report Abuse!', 'mailto:support@aboutus.org?subject=URLShortenerAbuse' %></li>
 </ul>
